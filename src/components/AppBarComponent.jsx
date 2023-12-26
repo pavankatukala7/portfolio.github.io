@@ -5,6 +5,7 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AUTHOR_NAME } from "../constants/displayConstants";
@@ -13,6 +14,7 @@ import BasicPopover from "./Calendar";
 
 const AppBarComponent = () => {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -37,17 +39,15 @@ const AppBarComponent = () => {
         <IconButton color="inherit">
           <MenuIcon />
         </IconButton>
-        <IconButton color="inherit">
-          <Avatar
-            alt="Remy Sharp"
-            src={profileImage}
-            sx={{ width: 48, height: 48 }}
-          />
-        </IconButton>
-        <Typography variant="h6" noWrap component="div">
+        {!isSmallScreen && (
+          <IconButton color="inherit">
+            <Avatar alt="Remy Sharp" src={profileImage} sx={{ width: 48, height: 48 }} />
+          </IconButton>
+        )}
+        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           {AUTHOR_NAME}
         </Typography>
-        <BasicPopover  formattedDateTime={formattedDateTime}/>
+        <BasicPopover formattedDateTime={formattedDateTime} />
       </Toolbar>
     </StyledAppBar>
   );
