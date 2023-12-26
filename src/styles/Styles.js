@@ -9,7 +9,6 @@ export const StyledRootGrid = styled(Grid)`
 
 export const StyledRootBox = styled(Box)`
   display: flex;
-  height: 100vh;
 `;
 
 export const StyledAppBar = styled(AppBar)`
